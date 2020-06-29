@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import style
@@ -7,9 +6,7 @@ from datetime import datetime as dt
 import numpy as np
 
 data = "DSNY_Monthly_Tonnage_Data.csv"
-
 DF = pd.read_csv(data)
-
 
 
 def date_convert(string):
@@ -266,9 +263,11 @@ class NYC:
         plt.figure(figsize=(10,6), dpi= 80)
         plt.hlines(y=df.index, xmin=0, xmax=df.values_z, color=df.colors, alpha=0.4, linewidth=5)
 
-        plt.gca().set(ylabel='District', xlabel='Divergence from a {} rate'.format(round(boro_value,2)))
+        plt.gca().set(ylabel='District', xlabel='Divergence from a {} rate'.format(round(boro_value,4)))
         plt.yticks(df.index, df.name, fontsize=12)
         plt.title('{} {} collection divergence by district'.format(boro.boro_name,data), fontdict={'size':20})
         plt.grid(linestyle='--', alpha=0.5)
-        #plt.savefig('visuals/{}/districts/{}_{}_divergance.png'.format(boro.boro_name.replace(" ",""),boro.boro_name.replace(" ",""),data))
+        plt.savefig('visuals/{}/districts/{}_{}_divergance.png'.format(boro.boro_name.replace(" ",""),boro.boro_name.replace(" ",""),data))
         plt.show()
+nyc = NYC()
+plots = nyc.boro_plots(2019)
